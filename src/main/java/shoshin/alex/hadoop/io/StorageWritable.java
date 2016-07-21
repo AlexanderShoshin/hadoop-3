@@ -55,4 +55,10 @@ public class StorageWritable implements Writable {
     public void increaseCount(int val) {
         count += val;
     }
+    
+    @Override
+    public boolean equals(Object object) {
+        StorageWritable storage = (StorageWritable) object;
+        return (storage.summ == summ) && (storage.count == count);
+    }
 }
