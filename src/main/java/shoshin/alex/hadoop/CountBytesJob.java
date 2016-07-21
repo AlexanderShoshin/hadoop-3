@@ -43,8 +43,6 @@ public class CountBytesJob extends Configured implements Tool {
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        int result = job.waitForCompletion(true) ? 0 : 1;
-        System.out.println(job.getCounters().findCounter("Map errors", "WRONG_LOG_FORMAT"));
-        return result;
+        return job.waitForCompletion(true) ? 0 : 1;
     }
 }
