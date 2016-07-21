@@ -8,22 +8,21 @@ package shoshin.alex.hadoop.io;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Writable;
 
 /**
  *
  * @author Alexander_Shoshin
  */
-public class StorageWritable implements Writable {
+public class SummCountWritable implements Writable {
     private int summ;
     private int count;
     
-    public StorageWritable() {
+    public SummCountWritable() {
         this(0, 0);
     }
     
-    public StorageWritable(int summ, int count) {
+    public SummCountWritable(int summ, int count) {
         this.summ = summ;
         this.count = count;
     }
@@ -58,7 +57,12 @@ public class StorageWritable implements Writable {
     
     @Override
     public boolean equals(Object object) {
-        StorageWritable storage = (StorageWritable) object;
+        SummCountWritable storage = (SummCountWritable) object;
         return (storage.summ == summ) && (storage.count == count);
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%1$s,%2$s", summ, count);
     }
 }
