@@ -10,7 +10,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import shoshin.alex.hadoop.io.AverageSummWritable;
@@ -20,6 +19,8 @@ public class CountBytesJob extends Configured implements Tool {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         conf.set("mapreduce.output.textoutputformat.separator", ",");
+        conf.setBoolean("mapreduce.output.fileoutputformat.compress", true);
+        conf.setClass("mapreduce.output.fileoutputformat.compress.codec", SnappyCodec.class, CompressionCodec.class);
         int res = ToolRunner.run(conf, new CountBytesJob(), args);
         System.exit(res);
     }
@@ -37,7 +38,7 @@ public class CountBytesJob extends Configured implements Tool {
         job.setReducerClass(SummBytesReducer.class);
         job.setCombinerClass(SummBytesCombiner.class);
         job.setInputFormatClass(TextInputFormat.class);
-        job.setOutputFormatClass(TextOutputFormat.class);
+        job.setOutputFormatClass(SequenceFileOutputFormat.class);
         job.setNumReduceTasks(1);
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
