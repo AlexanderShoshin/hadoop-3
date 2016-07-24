@@ -42,14 +42,14 @@ public class MRUnitCountBytesTest {
     }
     
     @Test
-    public void testMapper() throws IOException {
+    public void mapper_should_extract_ip_and_bytes_count() throws IOException {
         mapDriver.withInput(new LongWritable(1), new Text(dataSet[0]));
         mapDriver.withOutput(new Text("ip1"), new SummCountWritable(4600, 1));
         mapDriver.runTest();
     }
     
     @Test
-    public void testCombiner() throws IOException {
+    public void combiner_should_summarize_bytes_and_counts() throws IOException {
         List<SummCountWritable> byteStorages = new ArrayList<SummCountWritable>();
         byteStorages.add(new SummCountWritable(12, 1));
         byteStorages.add(new SummCountWritable(50, 1));
@@ -60,7 +60,7 @@ public class MRUnitCountBytesTest {
     }
     
     @Test
-    public void testReducer() throws IOException {
+    public void reducer_should_count_average_and_total() throws IOException {
         List<SummCountWritable> byteStorages = new ArrayList<SummCountWritable>();
         byteStorages.add(new SummCountWritable(20, 2));
         byteStorages.add(new SummCountWritable(30, 1));
@@ -71,16 +71,16 @@ public class MRUnitCountBytesTest {
     }
     
     @Test
-    public void testMapReduce() throws IOException {
-        testMapReduceDriver(mapReduceDriver);
+    public void job_mast_work_without_combiner() throws IOException {
+        processJob(mapReduceDriver);
     }
     
     @Test
-    public void testMapCombineReduce() throws IOException {
-        testMapReduceDriver(mapCombineReduceDriver);
+    public void job_mast_work_with_combiner() throws IOException {
+        processJob(mapCombineReduceDriver);
     }
     
-    private void testMapReduceDriver(MapReduceDriver driver) throws IOException {
+    private void processJob(MapReduceDriver driver) throws IOException {
         driver.withInput(new LongWritable(1), new Text(dataSet[0]));
         driver.withInput(new LongWritable(1), new Text(dataSet[1]));
         driver.withInput(new LongWritable(1), new Text(dataSet[2]));
