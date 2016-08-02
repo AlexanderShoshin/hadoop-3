@@ -18,7 +18,7 @@ import shoshin.alex.utils.Args;
 
 public class CountBytesJob extends Configured implements Tool {
     public static void main(String[] args) throws Exception {
-        new Args("Dataset file path", "Output directory path").checkInput(args);
+        Args.checkInput(args, "Dataset file path", "Output directory path");
         Configuration conf = new Configuration();
         conf.set("mapreduce.output.textoutputformat.separator", ",");
         conf.setBoolean("mapreduce.output.fileoutputformat.compress", true);
