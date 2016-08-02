@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package shoshin.alex.hadoop.io;
 
 import java.io.DataInput;
@@ -10,10 +5,6 @@ import java.io.DataOutput;
 import java.io.IOException;
 import org.apache.hadoop.io.Writable;
 
-/**
- *
- * @author Alexander_Shoshin
- */
 public class SummCountWritable implements Writable {
     private int summ;
     private int count;

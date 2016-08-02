@@ -5,10 +5,6 @@ import java.io.DataOutput;
 import java.io.IOException;
 import org.apache.hadoop.io.Writable;
 
-/**
- *
- * @author Alexander_Shoshin
- */
 public class AverageSummWritable implements Writable {
     private double average;
     private int summ;

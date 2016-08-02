@@ -3,10 +3,6 @@ package shoshin.alex.data;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author Alexander_Shoshin
- */
 public class ServerLog {
     private static String LOG_ENTRY_PATTERN = "^(\\S+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(.+?)\" (\\d{3}) (\\d+) \"([^\"]+)\" \"([^\"]+)\"";
     private static int NUM_FIELDS = 9;

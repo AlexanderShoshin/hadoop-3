@@ -9,10 +9,6 @@ import org.apache.hadoop.mapreduce.Mapper;
 import shoshin.alex.hadoop.io.SummCountWritable;
 import shoshin.alex.data.ServerLog;
 
-/**
- *
- * @author Alexander_Shoshin
- */
 public class ExtractBytesByIdMapper extends Mapper<LongWritable, Text, Text, SummCountWritable> {
     @Override
     public void map(LongWritable key, Text value, Mapper.Context context) throws IOException, InterruptedException {

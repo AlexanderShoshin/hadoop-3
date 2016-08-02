@@ -5,10 +5,6 @@ import org.apache.hadoop.io.*;
 import shoshin.alex.hadoop.io.AverageSummWritable;
 import shoshin.alex.hadoop.io.SummCountWritable;
 
-/**
- *
- * @author Alexander_Shoshin
- */
 public class SummBytesReducer extends SummBytes<Text, AverageSummWritable> {
     @Override
     public void reduce(Text key, Iterable<SummCountWritable> values, SummBytesReducer.Context context)
