@@ -17,7 +17,7 @@ public class ServerLog {
         final Matcher matcher = pattern.matcher(str);
         
         if (!matcher.matches() || NUM_FIELDS != matcher.groupCount()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("bad log format");
         }
         
         return new ServerLog(matcher);
