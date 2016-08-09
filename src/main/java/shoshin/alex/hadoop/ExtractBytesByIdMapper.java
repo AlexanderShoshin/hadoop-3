@@ -31,8 +31,8 @@ public class ExtractBytesByIdMapper extends Mapper<LongWritable, Text, Text, Sum
     }
     
     private void collectBrowsersStat(ServerLog log, Mapper.Context context) {
-        UserAgentStringParser parser = UADetectorServiceFactory.getResourceModuleParser();
-        ReadableUserAgent browser = parser.parse(log.getBrowser());
+        UserAgentStringParser userAgentParser = UADetectorServiceFactory.getResourceModuleParser();
+        ReadableUserAgent browser = userAgentParser.parse(log.getBrowser());
         context.getCounter("Browser used", browser.getName()).increment(1);
     }
 }
