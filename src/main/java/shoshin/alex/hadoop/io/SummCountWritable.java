@@ -14,6 +14,10 @@ public class SummCountWritable implements Writable {
     }
     
     public SummCountWritable(int summ, int count) {
+        set(summ, count);
+    }
+    
+    public void set(int summ, int count) {
         this.summ = summ;
         this.count = count;
     }

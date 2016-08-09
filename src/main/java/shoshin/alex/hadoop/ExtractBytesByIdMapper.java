@@ -12,13 +12,18 @@ import shoshin.alex.data.ServerLog;
 
 public class ExtractBytesByIdMapper extends Mapper<LongWritable, Text, Text, SummCountWritable> {
     private static final Logger LOGGER = Logger.getLogger(ExtractBytesByIdMapper.class);
+    private Text id = new Text();
+    private SummCountWritable bytes = new SummCountWritable();
+    
     @Override
     public void map(LongWritable key, Text value, Mapper.Context context) throws IOException, InterruptedException {
         String line = value.toString();
         try {
             ServerLog log = ServerLog.parse(line);
             collectBrowsersStat(log, context);
-            context.write(new Text(log.getId()), new SummCountWritable(log.getSentBytes(), 1));
+            id.set(log.getId());
+            bytes.set(log.getSentBytes(), 1);
+            context.write(id, bytes);
         } catch (IllegalArgumentException exception) {
             LOGGER.error("Exception occured: " + exception.getMessage() + ", wrong line format in " + line);
             context.getCounter("Map errors", "WRONG_LOG_FORMAT").increment(1);
