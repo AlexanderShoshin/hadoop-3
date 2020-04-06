@@ -14,9 +14,15 @@ public class ExtractBytesByIdMapper extends Mapper<LongWritable, Text, Text, Sum
     private static final Logger LOGGER = Logger.getLogger(ExtractBytesByIdMapper.class);
     private Text id = new Text();
     private SummCountWritable bytes = new SummCountWritable();
+
+    public SummCountWritable bytes2 = new SummCountWritable();
     
     @Override
     public void map(LongWritable key, Text value, Mapper.Context context) throws IOException, InterruptedException {
+        Thread thread1 =new MyThread(bytes2);
+        Thread thread2 =new MyThread(bytes2);
+        thread1.start();
+        thread2.start();
         String line = value.toString();
         try {
             ServerLog log = ServerLog.parse(line);
